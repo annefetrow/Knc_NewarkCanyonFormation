@@ -1,0 +1,25 @@
+---
+title: "Run Plan"
+author: "Anne Fetrow"
+date: "5/21/2019"
+output: html_document
+---
+
+```{r Run List Gsheet }
+#Googlesheet of all samples run for Knc project with notes, masses, etc
+  #https://docs.google.com/spreadsheets/d/13ZDPO-kq_eucdurIJ7z-J-6oa2t8vQISYGtf029h_oI/edit?usp=sharing
+```
+
+```{r 201907 priorites}
+#sample priorites for July 2019
+  # Priority 1: TS2 Mp facies selecting for micrite, microsparite, and spar-fill to start to build endmember values for this facies. 
+  # Priority 2: Run a few Ely Limstone replicates to get that end member value. 
+  # Priority 3: lateral variation samples from TS2 from 21.5 and 23 m. I think this will give an interesting look into the range of values I should expect and I can also test purposefully the different fabrics with these facies. 
+
+```
+
+###201907 - Samples
+      Sample ID       |  Facies  |  Wt%Carb  | Notes
+----------------------|----------|-----------|--------------------------------------
+ACF-NCF-TS2-16-##     | Mp       |           | 
+                      |          |           |  
