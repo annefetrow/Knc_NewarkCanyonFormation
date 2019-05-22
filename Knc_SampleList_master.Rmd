@@ -1,0 +1,142 @@
+---
+title: "Knc_SampleList_master"
+author: "Anne Fetrow"
+date: "5/22/2019"
+output: html_document
+output: 
+  html_document:
+  css: stylesheet.css
+  fig_caption: yes
+  number_sections: yes
+  toc: yes
+  toc_float: yes
+  toc_depth: 3
+  code_folding: show
+  df_print: paged
+editor_options: console
+---
+#####Install new isoreader package
+```{r install, eval = FALSE}
+#devtools::install_github("KopfLab/isoreader")
+#devtools::install_github("cubessil/isoprocessCUBES") #general CUBESsil lab stuff
+#devtools::install_github("cubessil/Brettscustomfunctions") #only for processing clumped data
+```
+
+#####Load libraries
+```{r setup, message=FALSE, warning=FALSE}
+base.directory<-file.path("..") 
+
+library(isoreader)
+library(tidyverse)
+library(isoprocessCUBES)
+library(brettscustomfunctions)
+library(rlang)
+library(plotly)
+library(RDocumentation)
+library(tictoc)
+```
+
+```{r Read in SampleList}
+Knc_Samples <- read.csv("Knc_SampleList_Master.csv")
+```
+
+```{r Merge SampleList and Geochem dataframes}
+
+
+```
+
+```{r Subsetting dataframes by Section}
+
+Knc_TS2 <- Knc_Samples %>% filter(Section == "TS2")
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+EXTRA CODE THAT I MIGHT WANT LATER
+# ```{r summarize data}
+# #pulling corrected clumped data from Clumped Processing code
+# correcteddata <- read.csv("ACF_alldata_brandfixed.csv")
+# 
+# justsamples <- correcteddata %>% filter(Type=="sample") %>% filter( Sample.ID != "MERCK")
+# 
+# avg_correcteddata <- correcteddata %>% filter(Type=="sample" & Sample.ID!= "MERCK") %>% group_by(Sample.ID) %>% summarise(
+#     Replicates = n(),  
+#     
+#     d13C.stddev = sd(d13C, na.rm=TRUE),
+#     d13C.stderr = d13C.stddev/sqrt(max(Replicates)),
+#     d13C.PDB = mean(d13C), 
+#     
+#     d18O.SMOW.gas.stddev = sd(d18O.SMOW.gas, na.rm=TRUE),
+#     d18O.SMOW.gas.stderr = d18O.SMOW.gas.stddev/sqrt(max(Replicates)),
+#     d18O.SMOW.gas = mean(d18O.SMOW.gas), 
+#     
+#     d18O.VPDB.min.stddev = sd(d18O.VPDB.min, na.rm=TRUE),
+#     d18O.VPDB.min.stderr = d18O.VPDB.min.stddev/sqrt(max(Replicates)),
+#     d18O.VPDB.min = mean(d18O.VPDB.min), 
+#     
+#     D47.stddev = mean(ARF.D47stdcorr.pri.line, na.rm=TRUE),
+#     D47.stderr = D47.stddev/sqrt(max(Replicates)),
+#     D47.CDES = mean(ARF.D47stdcorr.pri.line), 
+#     
+#     ARF.Ghosh.temperature.stddev = sd(ARF.Ghosh.temp.pri.line), 
+#     ARF.Ghosh.temperature.stderr = ARF.Ghosh.temperature.stddev/sqrt(max(Replicates)), 
+#     ARF.Ghosh.temperature = mean(ARF.Ghosh.temp.pri.line),
+#     
+#     ARF.Bonifacie.temperature.stddev = sd(ARF.Bonifacie.temp.pri.line), 
+#     ARF.Bonifacie.temperature.stderr = ARF.Bonifacie.temperature.stddev/sqrt(max(Replicates)), 
+#     ARF.Bonifacie.temperature = mean(ARF.Bonifacie.temp.pri.line),
+#     
+#     d18O.water.stddev = sd(d18O.water.calc), 
+#     d18O.water.stderr = d18O.water.stddev/sqrt(max(Replicates)), 
+#     d18O.water = mean(d18O.water.calc)
+#     
+#     )
+# 
+#     #d45.stddev = sd(d45, na.rm=TRUE),
+#     #d45 = mean(d45), 
+#     #d46.stddev = sd(d46, na.rm=TRUE),
+#     #d46 = mean(d46), 
+#     #d47.stddev = sd(d47, na.rm=TRUE),
+#     #d47 = mean(d47), 
+#     #d48.stddev = sd(d48, na.rm=TRUE),
+#     #d48 = mean(d48), 
+#     #d49.stddev = sd(d49, na.rm=TRUE),
+#     #d49 = mean(d49), 
+#     #D47.stddev = mean(D47, na.rm=TRUE),
+#     #D47 = mean(D47), 
+#     #D48.stddev = sd(D48, na.rm=TRUE),    
+#     #D48 = mean(D48), 
+#     #D49.stddev = sd(D49, na.rm=TRUE),
+#     #D49 = mean(D49),
+#     #ARF.D47stdcorr.sec.allstds.stddev = sd(ARF.D47stdcorr.sec.allstds),
+#     #ARF.D47stdcorr.sec.allstds = mean(ARF.D47stdcorr.sec.allstds), 
+#     #ARF.Acid.corr.pri.defliese.stddev = sd(ARF.Acid.corr.pri.defliese),
+#     #ARF.Acid.corr.pri.defliese = mean(ARF.Acid.corr.pri.defliese), 
+#     #ARF.Acid.corr.pri.henkes.stddev = sd(ARF.Acid.corr.pri.henkes),
+#     #ARF.Acid.corr.pri.henkes = mean(ARF.Acid.corr.pri.henkes)
+#     #D47.stdev = sd(D47full),
+#     #D47= mean(D47full),
+#     #D47.se = D47.stdev/sqrt(max(n)),
+# ```
+
+
+
+
+
+
+
+
