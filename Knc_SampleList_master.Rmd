@@ -46,9 +46,57 @@ Knc_Samples <- read.csv("Knc_SampleList_Master.csv")
 ```
 
 ```{r Subsetting dataframes by Section}
+Knc_Samples_TS <- Knc_Samples %>% filter(Section != "DG")
+Knc_TS2 <- Knc_Samples %>% filter(Section == "TS2") #& Facies_ID == "Mp")
+Knc_TS3 <- Knc_Samples %>% filter(Section == "TS3")
+Knc_TS4 <- Knc_Samples %>% filter(Section == "TS4") 
+Knc_TS5 <- Knc_Samples %>% filter(Section == "TS5") 
 
-Knc_TS2 <- Knc_Samples %>% filter(Section == "TS2")
+```
 
+```{r Strat Plotting}
+
+Knc_Stratdistr <- Knc_Samples_TS %>% ggplot(aes(Facies_ID, Top_Height_m, color=Facies_ID, label=Sample_ID)) +
+      geom_point()
+Knc_Stratdistr
+
+TS2_faciesdistr <- Knc_TS2 %>% group_by(Facies_ID) %>% ggplot(aes(Facies_ID, Top_Height_m, color=Facies_ID, label=Sample_ID)) +
+      geom_point()
+TS2_faciesdistr
+
+TS4_faciesdistr <- Knc_TS4 %>% group_by(Facies_ID) %>% ggplot(aes(Facies_ID, Top_Height_m, color=Facies_ID, label=Sample_ID)) +
+      geom_point()
+TS4_faciesdistr
+
+TS3_faciesdistr <- Knc_TS3 %>% group_by(Facies_ID) %>% ggplot(aes(Facies_ID, Top_Height_m, color=Facies_ID, label=Sample_ID)) +
+      geom_point()
+TS3_faciesdistr
+
+TS5_faciesdistr <- Knc_TS5 %>% group_by(Facies_ID) %>% ggplot(aes(Facies_ID, Top_Height_m, color=Facies_ID, label=Sample_ID)) +
+      geom_point()
+TS5_faciesdistr
+
+```
+```{r Lateral Variation}
+Lat_21.5m <- Knc_Samples_TS %>% filter(Section == "TS2-21.5")
+Lateral_21.5 <- Lat_21.5m %>% ggplot(aes(Lateral_Distance_m, Facies_ID, color=Facies_ID, label=Sample_ID)) +
+      geom_point()
+Lateral_21.5
+
+Lat_30m <- Knc_Samples_TS %>% filter(Section == "TS2-30")
+Lateral_30 <- Lat_30m %>% ggplot(aes(Lateral_Distance_m, Facies_ID, color=Facies_ID, label=Sample_ID)) +
+      geom_point()
+Lateral_30
+
+Lat_317m <- Knc_Samples_TS %>% filter(Section == "TS-317")
+Lateral_317 <- Lat_317m %>% ggplot(aes(Lateral_Distance_m, Facies_ID, color=Facies_ID, label=Sample_ID)) +
+      geom_point()
+Lateral_317
+
+Lat_323m <- Knc_Samples_TS %>% filter(Section == "TS-323")
+Lateral_323 <- Lat_323m %>% ggplot(aes(Lateral_Distance_m, Facies_ID, color=Facies_ID, label=Sample_ID)) +
+      geom_point()
+Lateral_323
 ```
 
 
