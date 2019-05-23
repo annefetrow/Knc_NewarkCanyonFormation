@@ -21,7 +21,6 @@ editor_options: console
 #devtools::install_github("cubessil/isoprocessCUBES") #general CUBESsil lab stuff
 #devtools::install_github("cubessil/Brettscustomfunctions") #only for processing clumped data
 ```
-
 #####Load libraries
 ```{r setup, message=FALSE, warning=FALSE}
 base.directory<-file.path("..") 
@@ -45,13 +44,62 @@ Knc_Samples <- read.csv("Knc_SampleList_Master.csv")
 
 ```
 
-```{r Subsetting dataframes by Section}
+```{r Combining Sample info with Averaged Delta Geochem}
 Knc_Samples_TS <- Knc_Samples %>% filter(Section != "DG")
-Knc_TS2 <- Knc_Samples %>% filter(Section == "TS2") #& Facies_ID == "Mp")
-Knc_TS3 <- Knc_Samples %>% filter(Section == "TS3")
-Knc_TS4 <- Knc_Samples %>% filter(Section == "TS4") 
-Knc_TS5 <- Knc_Samples %>% filter(Section == "TS5") 
 
+Knc_DeltaGeochem_avg_20190523 <- read.csv("Knc_DeltaGeochem_avg_20190523")
+Knc_DeltaGeochem_avg_20190523 <- Knc_DeltaGeochem_avg_20190523 %>% mutate(Sample_ID = Identifier1)
+Knc_Samples_Deltageochem <- right_join(Knc_Samples_TS, Knc_DeltaGeochem_avg_20190523)
+```
+
+```{r Subsetting dataframes by Section}
+Knc_TS2 <- Knc_Samples_Deltageochem %>% filter(Section == "TS2") #& Facies_ID == "Mp")
+Knc_TS3 <- Knc_Samples_Deltageochem %>% filter(Section == "TS3")
+Knc_TS4 <- Knc_Samples_Deltageochem %>% filter(Section == "TS4") 
+Knc_TS5 <- Knc_Samples_Deltageochem %>% filter(Section == "TS5") 
+```
+
+```{r d13C vs Strat by Section}
+d13C_TS2 <- Knc_TS2 %>% ggplot(aes(d13C.mean, Top_Height_m, color=Facies_ID, label=Sample_ID)) +
+                          geom_point()
+d13C_TS2
+
+d13C_TS3 <- Knc_TS3 %>% ggplot(aes(d13C.mean, Top_Height_m, color=Facies_ID, label=Sample_ID)) +
+                          geom_point()
+d13C_TS3
+
+d13C_TS4 <- Knc_TS4 %>% ggplot(aes(d13C.mean, Top_Height_m, color=Facies_ID, label=Sample_ID)) +
+                          geom_point()
+d13C_TS4
+
+d13C_TS5 <- Knc_TS5 %>% ggplot(aes(d13C.mean, Top_Height_m, color=Facies_ID, label=Sample_ID)) +
+                          geom_point()
+d13C_TS5
+
+d13C_all <- Knc_Samples_Deltageochem %>% ggplot(aes(d13C.mean, Top_Height_m, color=Facies_ID, label=Sample_ID)) +
+                          geom_point()
+d13C_all
+```
+```{r d18O vs Strat by Section}
+d18O_TS2 <- Knc_TS2 %>% ggplot(aes(d18O.mean, Top_Height_m, color=Facies_ID, label=Sample_ID)) +
+                          geom_point()
+d18O_TS2
+
+d18O_TS3 <- Knc_TS3 %>% ggplot(aes(d18O.mean, Top_Height_m, color=Facies_ID, label=Sample_ID)) +
+                          geom_point()
+d18O_TS3
+
+d18O_TS4 <- Knc_TS4 %>% ggplot(aes(d18O.mean, Top_Height_m, color=Facies_ID, label=Sample_ID)) +
+                          geom_point()
+d18O_TS4
+
+d18O_TS5 <- Knc_TS5 %>% ggplot(aes(d18O.mean, Top_Height_m, color=Facies_ID, label=Sample_ID)) +
+                          geom_point()
+d18O_TS5
+
+d18O_all <- Knc_Samples_Deltageochem %>% ggplot(aes(d18O.mean, Top_Height_m, color=Facies_ID, label=Sample_ID)) +
+                          geom_point()
+d18O_all
 ```
 
 ```{r Strat Plotting}
@@ -97,6 +145,16 @@ Lat_323m <- Knc_Samples_TS %>% filter(Section == "TS-323")
 Lateral_323 <- Lat_323m %>% ggplot(aes(Lateral_Distance_m, Facies_ID, color=Facies_ID, label=Sample_ID)) +
       geom_point()
 Lateral_323
+```
+```{r Section Average Geochem Values}
+#average d13Ccarb of each section
+
+Geochem_sectionaverages <- Knc_Samples_Deltageochem %>% group_by(Section) %>%
+                              summarise(
+                                d13C_average = mean(d13C.mean),
+                                d18O_average = mean(d18O.mean))
+ 
+
 ```
 
 
